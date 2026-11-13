@@ -57,7 +57,7 @@ Un prestito dura 30 giorni.
 
 ## 1.5 – Il calendario delle aperture (40 minuti) – `calendario.php`
 Una pagina web con una tabella delle prossime due settimane, a partire da oggi:
-1. Una riga per giorno, con la data (`13/11/2026`) e il giorno della settimana in italiano.
+1. Una riga per giorno, con la data  e il giorno della settimana in italiano.
 2. Un ciclo `for` da 0 a 13: il giorno `$i` è `strtotime("+$i days")`.
 3. Le domeniche non compaiono (`continue`).
 4. Accanto al sabato: `chiude alle 13:00`; accanto agli altri giorni `9:00 - 19:00`.
@@ -75,7 +75,7 @@ Una pagina web con una tabella delle prossime due settimane, a partire da oggi:
        <p>Libro lungo</p>
    <?php } ?>
    ```
-5. In fondo alla pagina: `Pagina generata il 13/11/2026 alle 10:42` con `date()`.
+5. In fondo alla pagina: `Pagina generata il dataCorrente alle orarioCorrente` con `date()`.
 6. Apri Ctrl+U nel browser: cosa vedi al posto del codice PHP?
 
 ## 1.7 – Cosa stampa? (20 minuti) – `es-1-7.php`
