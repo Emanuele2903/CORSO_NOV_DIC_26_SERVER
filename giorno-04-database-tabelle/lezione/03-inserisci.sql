@@ -12,7 +12,7 @@ INSERT INTO generi (nome) VALUES ('Racconti'), ('Giallo'), ('Saggio');
 
 -- Le stringhe vanno tra apici singoli. Un apostrofo dentro il testo si raddoppia: ''
 INSERT INTO autori (nome, cognome) VALUES
-('Italo', 'Calvino'),
+('Italo', 'Calvino'),`server lezione`
 ('Umberto', 'Eco'),
 ('Carlo', 'Fruttero'),
 ('Franco', 'Lucentini');
