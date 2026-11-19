@@ -1,4 +1,4 @@
-lezione_sql-- =====================================================================
+lezione_sql;-- =====================================================================
 -- 02 - CREARE DATABASE E TABELLE
 -- In HeidiSQL (utente corso): File > Carica file SQL, poi F9.
 -- Dopo l'esecuzione: F5 nell'elenco a sinistra.
