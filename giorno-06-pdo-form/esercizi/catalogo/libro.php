@@ -23,7 +23,7 @@ if ($libro === false) {
 
 // Una seconda query per gli autori (relazione N-N)
 $stmt = db()->prepare(
-    "SELECT a.nome, a.cognome
+    "SELECT a.nome, a.cognome, a.id
      FROM autori a JOIN libri_autori la ON la.autore_id = a.id
      WHERE la.libro_id = ?"
 );
@@ -37,10 +37,21 @@ require __DIR__ . '/parti/testata.php';
 <h1><?= e($libro['titolo']) ?></h1>
 <p>
     <?php foreach ($autori as $a) { ?>
-        <?= e($a['nome'] . ' ' . $a['cognome']) ?><br>
+        <a href="autore.php?id=<?= (int) $a['id'] ?>"><?= e($a['nome'] . ' ' . $a['cognome']) ?></a><br>
     <?php } ?>
+    <!-- SOLUZIONE ALTERNATIVA -->
+    <?php 
+    // $linkAutori = [];
+    // foreach ($autori as $a) {
+    // $nomeAut = trim((string) ($a['nome'] ?? '') . ' ' . (string) ($a['cognome'] ?? ''));
+    // $linkAutori[] = '<a href="autore.php?id=' . (int) $a['id'] . '">' . e($nomeAut) . '</a>';
+    // }
+    // echo implode(', ', $linkAutori); 
+    ?>
 </p>
 <p>Anno: <?= $libro['anno'] ?? '-' ?> - Pagine: <?= $libro['pagine'] ?? '-' ?> - Genere: <?= e($libro['genere'] ?? '-') ?></p>
 <p><a href="index.php">Torna al catalogo</a></p>
 
 <?php require __DIR__ . '/parti/piede.php'; ?>
+
+
