@@ -10,36 +10,44 @@ $stmt = db()->prepare(
 $stmt->execute([$id]);
 $autore = $stmt->fetch();
 
+
 if ($autore === false) {
     http_response_code(404);
-    $titoloPagina = 'Libro non trovato';
+    $titoloPagina = 'Autore non trovato';
     require __DIR__ . '/parti/testata.php';
-    echo '<h1>Libro non trovato</h1>';
+    echo '<h1>Autore non trovato</h1>';
     require __DIR__ . '/parti/piede.php';
     exit;
 }
 
-// Una seconda query per gli autori (relazione N-N)
+// // Una seconda query per i libri (relazione N-N)
 $stmt = db()->prepare(
-    "SELECT a.nome, a.cognome
-     FROM autori a JOIN libri_autori la ON la.autore_id = a.id
-     WHERE la.libro_id = ?"
+    "SELECT l.* FROM libri l
+LEFT JOIN libri_autori la ON la.libro_id=l.id
+WHERE la.autore_id=?"
 );
 $stmt->execute([$id]);
-$autori = $stmt->fetchAll();
+$libri = $stmt->fetchAll();
 
-$titoloPagina = $autore['titolo'];
+$titoloPagina = $autore['cognome'];
 require __DIR__ . '/parti/testata.php';
 ?>
 
-<h1><?= e($autore['titolo']) ?></h1>
-<p>
-    <?php foreach ($autori as $a) { ?>
-        <?= e($a['nome'] . ' ' . $a['cognome']) ?><br>
+<h1><?=e($autore['cognome']) . " " . e($autore['nome']) ?></h1>
+
+<p>Anno di nascita: <?= $autore['anno_nascita'] ?? '-' ?> - Nazionalità: <?= $autore['nazionalita'] ?? '-' ?></p>
+
+<table>
+    <tr><th>Titolo</th>
+    <th>Genere</th>
+    <th>Anno</th></tr>
+    <?php foreach ($libri as $libro) { ?>
+        <tr>
+            <td><a href="libro.php?id=<?= $libro['id'] ?>"><?= e($libro['titolo']) ?></a></td>
+            <td><?= $libro['anno'] ?></td>
+        </tr>
     <?php } ?>
-</p>
-<p>Anno: <?= $libro['anno'] ?? '-' ?> - Pagine: <?= $libro['pagine'] ?? '-' ?> - Genere: <?= e($libro['genere'] ?? '-') ?></p>
-<p><a href="index.php">Torna al catalogo</a></p>
+</table>
+<p><a href="autori.php">Torna agli autori</a></p>
 
 <?php require __DIR__ . '/parti/piede.php'; ?>
-
