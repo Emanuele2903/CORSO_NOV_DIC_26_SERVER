@@ -11,5 +11,6 @@
     <a href="index.php"><strong>Bookshelf</strong></a>
     <a href="index.php">Catalogo</a>
     <a href="nuovo.php">Nuovo libro</a>
+    <a href="autori.php">Autori</a>
 </header>
 <main>
